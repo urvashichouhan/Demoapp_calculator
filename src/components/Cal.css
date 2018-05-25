@@ -1,0 +1,49 @@
+
+.calculator {
+  width: 20em;
+  margin:auto;
+}
+
+.row {
+  display: flex;
+}
+
+.top {
+  font-size: 2em;
+  background: #4c4c4c;
+  height: 80px;
+  
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.row button:last-of-type {
+  border-right: 0.01em solid #8e8e8e;
+  background: #f5923e;
+  color: white;
+}
+
+	.row:last-of-type button:first-child,
+.row:nth-of-type(2) button:first-child {
+  flex-grow: 2.65;
+}
+
+.button {
+  font-size: 2em;
+  background: #e0e0e0;
+  border: 0.01em solid #8e8e8e;
+  border-top: none;
+  border-right: none;
+  padding: 0.5em 0;
+  width: 1em;	
+  flex-grow: 1;
+  transition: background 20ms;
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.button:active {
+  background: #b2b2b2;
+}
