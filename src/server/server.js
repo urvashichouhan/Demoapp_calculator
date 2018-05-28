@@ -41,7 +41,7 @@ passport.use(new LocalStrategy(
     console.log(username)
     console.log(password)
     Person.findOne({ 
-      username }, function (err, user) {
+      username :username}, function (err, user) {
       if (err) { return done(err); }
       if (!user) { return done(null, false); }
       if (!user.password) { return done(null, false); }
@@ -51,14 +51,14 @@ passport.use(new LocalStrategy(
 ));
 
 app.post('/hello1', 
-  passport.authenticate('local', { successRedirect:'/Signup',
-    failureRedirect:'/Login'}
+  passport.authenticate('local', { successRedirect:'/Success',
+    failureRedirect:'/Failure'}
   )
 );
-app.get('/Login', (req, res) => {
+app.get('/Failure', (req, res) => {  
   res.send(false);
 }); 
-app.get('/Signup', (req, res) => {
+app.get('/Success', (req, res) => {
   res.send(true);
 }); 
 
@@ -97,4 +97,4 @@ app.get('/hello3', async function(req, res){
 });
 app.listen(3030,function(){
 	console.log("server is running...")
-});
+}); 

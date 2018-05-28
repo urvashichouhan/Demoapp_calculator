@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Signup from './Signup.js'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import Home from './Home.js'
 import {signup } from '../action/SignupAction';
 import { Link } from 'react-router-dom';
-import {login } from '../action/LoginAction';
+import { login } from '../action/LoginAction';
 import{LoginReducer} from '../reducer/LoginReducer';
+import {fire} from '../Sagas';
 class Login extends Component{
 	constructor(){
 		super();
@@ -33,12 +35,20 @@ class Login extends Component{
 			password:this.state.password,			
 		}
 		this.props.login(data);
-		
+		console.log(this.props.auth)
+		if(this.props.auth)	 {
+				this.props.history.push("/Home"); 
+			}    
+			else{
+			alert("Invalid Username or password")
+			}		
 	}
 
-	render(){		console.log(this.props.auth)
+	render(){		
 		return(
 			<div className="container">		
+	
+		
 				<h1>LOGIN</h1><br/><br/>
 				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
@@ -60,15 +70,17 @@ class Login extends Component{
 	}
 }
 function mapStateToProps(state){
-	console.log(state)		
+		
+console.log(state)
 	return{
-		auth:state.data
+		auth:state.login.data
 	};
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    login: login
+  	login:login
+   
   }, dispatch);
 };
 

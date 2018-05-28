@@ -1,18 +1,19 @@
-import { AUTH_DATA} from '../action/types';
-
+import { AUTH_DATA,USER_FETCH_SUCCEEDED,USER_FETCH_FAILED} from '../action/types';
 const initialState={
 	data:false
 }
 
-export default function(state= initialState,action){
+export default function(state = initialState,action){			
+
 	switch(action.type){
-		case AUTH_DATA:
-		debugger 
+	
+		case USER_FETCH_SUCCEEDED:	
 			return{
 			...state,
-			data:action.payload		
+			data:action.user.data
+
 		}
-		default:
+		default:		
 			return state;
 	}
 }
