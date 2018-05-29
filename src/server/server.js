@@ -12,18 +12,18 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/my_db');
 
 var HistorySchema = mongoose.Schema({
-    inputCalculation: String,
-    summary: String 
+  inputCalculation: String,
+  summary: String 
 });
 var History = mongoose.model("History", HistorySchema);
 app.use(cors({origin:'*'}));
 
 
-var personSchema = mongoose.Schema({
-    username: String,
-    password: String,
-    email: String,
-    phone:Number
+var personSchema= mongoose.Schema({
+  username: String,
+  password: String,
+  email: String,
+  phone:Number
 });
 var Person = mongoose.model("Person", personSchema);
 app.use(cors({origin:'*'}));
@@ -50,7 +50,7 @@ passport.use(new LocalStrategy(
   }
 ));
 
-app.post('/hello1', 
+app.post('/authenticatedata', 
   passport.authenticate('local', { successRedirect:'/Success',
     failureRedirect:'/Failure'}
   )
@@ -63,8 +63,7 @@ app.get('/Success', (req, res) => {
 }); 
 
 
-app.post('/hello', (req, res) => {
-  
+app.post('/saveuserdata', (req, res) => {  
 	var data = new Person({
 		username:req.body.data.username,
 		password:req.body.data.password,
@@ -77,7 +76,7 @@ app.post('/hello', (req, res) => {
 		res.json(data);
 	})	
 });	
-app.post('/hello2', (req, res) => {
+app.post('/savehistory', (req, res) => {
   var data1 = new History({
     inputCalculation: req.body.data1.inputCalculation,
     summary:req.body.data1.summary
@@ -88,7 +87,7 @@ app.post('/hello2', (req, res) => {
     res.json(data1);
   })  
 }); 
-app.get('/hello3', async function(req, res){   
+app.get('/retrievehistory', async function(req, res){   
   var history = await History.find();
   console.log("---------------------------", history);
   var input=history.map(history=>history.inputCalculation);

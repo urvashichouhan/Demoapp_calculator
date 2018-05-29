@@ -3,7 +3,7 @@ import { AUTH_DATA,USER_FETCH_SUCCEEDED,USER_FETCH_FAILED} from './action/types'
 import axios from 'axios';
 
 function fire(action) {
-  return axios.post('http://localhost:3030/hello1', action.payload).then(res=>{
+  return axios.post('http://localhost:3030/authenticatedata', action.payload).then(res=>{
     return res;
   }).catch(function (error) {
     return error;

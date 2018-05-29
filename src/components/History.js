@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 export default class History extends Component{
-	 state = {
+	state = {
     Calculations:[]
   }
 
@@ -19,7 +19,7 @@ export default class History extends Component{
 			<div className="container">
 				<h1>History</h1>	
 				<div className="box">	
-					 { this.state.Calculations.map(Calculations => <li>{Calculations.inputCalculation}={Calculations.summary}</li>)}  					
+					{ this.state.Calculations.map(Calculations => <li>{Calculations.inputCalculation}={Calculations.summary}</li>)}  					
 				</div>			
 				<Link to="/Cal">Open Calculator</Link>		     
   		</div> 

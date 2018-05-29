@@ -6,13 +6,14 @@ import Signup from'./components/Signup';
 import Home from './components/Home.js'
 import Demo from './components/Demo.js'
 import Login from './components/Login.js'
+import Cal from './components/Cal.js'
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          
         </header>
       
         <Router>
@@ -20,7 +21,8 @@ class App extends Component {
             <Route path="/" component={Demo} />
             <Route path="/Signup" component={Signup} />
             <Route exact path="/"  component={Home}/>
-            <Route path ='/Login' component ={Login}/>  
+            <Route path ='/Login' component ={Login}/> 
+            <Route path ='/Cal' component ={Cal}/>  
           </div>    
         </Router>
       </div>

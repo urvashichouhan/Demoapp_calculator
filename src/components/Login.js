@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Signup from './Signup.js'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import Home from './Home.js'
+import Cal from './Cal.js'
 import {signup } from '../action/SignupAction';
-import { Link } from 'react-router-dom';
-import { login } from '../action/LoginAction';
+import {Link} from 'react-router-dom';
+import {login} from '../action/LoginAction';
 import{LoginReducer} from '../reducer/LoginReducer';
 import {fire} from '../Sagas';
 class Login extends Component{
 	constructor(){
 		super();
 		this.state={username:'',
-		password:'',
-		count:0
+			password:'',
+			count:0
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,21 +34,18 @@ class Login extends Component{
 			username:this.state.username,
 			password:this.state.password,			
 		}
-		this.props.login(data);
-		console.log(this.props.auth)
+		this.props.login(data);		
 		if(this.props.auth)	 {
-				this.props.history.push("/Home"); 
-			}    
-			else{
+			this.props.history.push("/Cal"); 
+		}    
+		else{
 			alert("Invalid Username or password")
-			}		
+		}		
 	}
 
 	render(){		
 		return(
-			<div className="container">		
-	
-		
+			<div className="container">			
 				<h1>LOGIN</h1><br/><br/>
 				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
@@ -79,8 +76,7 @@ console.log(state)
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-  	login:login
-   
+  	login:login   
   }, dispatch);
 };
 

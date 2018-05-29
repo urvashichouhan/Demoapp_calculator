@@ -4,63 +4,44 @@ import { Link } from 'react-router-dom';
 import History from './History.js'
 import './Cal.css';
 import axios from 'axios';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {evaluate,clearResult } from '../action/CalcAction.js';
 class Cal extends Component {
   state = {
     summary: '',
     input:''
   };
-
-  calculateResult(inputCalculation) {
+  calculateResult(inputCalculation) {     
     const{input}=this.state;
     let operations = inputCalculation
-          .split(/[\d]/)
+      .split(/[\d]/)
       .map(val => val.replace(/\./, ''))
       .filter(Boolean),
-    numbers = inputCalculation.split(/[%*+/-]+/).map(Number),
-    result = numbers.reduce((number1, number2, index) => {
-      switch (operations[index - 1]) {
-        case '+':
-          return number1 + number2;
-        case '-':
-          return number1 - number2;
-        case '%':
-          return number1 % number2;
-        case '*':
-          return number1 * number2;
-        case '/':
-          return number1 / number2;
-        default:
-          return 0;
-      }
-    });
-    this.setState({ summary: result.toString(),input:inputCalculation });
-      var data1={
-      inputCalculation:this.state.summary,
-      summary:result,
-      username:this.props.username
-    }
-    axios.post('http://localhost:3030/hello2', { data1 })
-   .then(res => {
-      console.log(res.data1);
-    })   
+    numbers = inputCalculation.split(/[%*+/-]+/).map(Number);
+    var data={
+      op:operations,
+      var1:numbers[0],
+      var2:numbers[1]
+    }  
+    this.props.evaluate(data);  
   }
 
   handleClick = event => {
     const operators = ['+', '-', '%', '*', '/'];
     switch (event.target.innerText) {
       case '=':
-        this.calculateResult(this.state.summary.slice());
+        this.calculateResult(this.state.summary.slice());              
         break;
-      case 'C':
-        this.setState({ summary: '' });
-        break;
+      case 'C': this.props.clearResult;
+        break;        
       case '+':
       case '%':
       case '/':
       case '*':
       case '-':
       case '.':
-        if (
+        if(
           operators.includes(this.state.summary.slice(-1)) &&
           operators.includes(event.target.innerText)
         ) {
@@ -69,12 +50,13 @@ class Cal extends Component {
       default:
         this.setState({
           summary: this.state.summary.concat(event.target.innerText)
-        });
+        });     
         break;
     }
   };
 
-  render() {
+  render() {  
+    console.log(this.props.result)
     return (
       <div className="container">
        <Link to="/Login">Log-out?</Link>
@@ -123,4 +105,17 @@ function CalcButton(props) {
   return <button className="button">{props.value}</button>;
 }
 
-export default Cal;
+function mapStateToProps(state){
+  return{
+    result:state.evaluate.data,    
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    evaluate: evaluate,  
+    clearResult:clearResult
+  }, dispatch);
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Cal);
