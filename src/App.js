@@ -7,6 +7,7 @@ import Home from './components/Home.js'
 import Demo from './components/Demo.js'
 import Login from './components/Login.js'
 import Cal from './components/Cal.js'
+import History from './components/History.js'
 class App extends Component {
   render() {
     return (
@@ -23,6 +24,7 @@ class App extends Component {
             <Route exact path="/"  component={Home}/>
             <Route path ='/Login' component ={Login}/> 
             <Route path ='/Cal' component ={Cal}/>  
+            <Route path ='/History' component ={History}/>  
           </div>    
         </Router>
       </div>

@@ -6,10 +6,12 @@ import './Cal.css';
 import axios from 'axios';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {evaluate,clearResult } from '../action/CalcAction.js';
+import {history} from '../action/Historyaction.js';
+import {evaluate,clearResult ,inputdata} from '../action/CalcAction.js';
+
 class Cal extends Component {
   state = {
-    summary: '',
+    summary:'',
     input:''
   };
   calculateResult(inputCalculation) {     
@@ -27,41 +29,25 @@ class Cal extends Component {
     this.props.evaluate(data);  
   }
 
-  handleClick = event => {
-    const operators = ['+', '-', '%', '*', '/'];
-    switch (event.target.innerText) {
-      case '=':
-        this.calculateResult(this.state.summary.slice());              
-        break;
-      case 'C': this.props.clearResult;
-        break;        
-      case '+':
-      case '%':
-      case '/':
-      case '*':
-      case '-':
-      case '.':
-        if(
-          operators.includes(this.state.summary.slice(-1)) &&
-          operators.includes(event.target.innerText)
-        ) {
-          break;
-        }
-      default:
-        this.setState({
-          summary: this.state.summary.concat(event.target.innerText)
-        });     
-        break;
+  handleClick = event => {    
+    var data= (event.target.innerText)
+    this.props.inputdata(data);    
+  };
+  handleClick1 = event => {    
+    var summary= document.getElementById("myText").innerText;
+    var data1={
+      summary:summary      
     }
+    
+   this.props.history(data1);   
   };
 
-  render() {  
-    console.log(this.props.result)
+  render() {     
     return (
       <div className="container">
        <Link to="/Login">Log-out?</Link>
         <div className="calculator" onClick={this.handleClick}>
-          <div className="row top">{this.state.summary}</div>
+          <div className="row top" id="myText">{this.props.result}</div>
           <div className="row">
             <CalcButton value="C" />
             <CalcButton value="%" />
@@ -93,8 +79,9 @@ class Cal extends Component {
             <CalcButton value="0" />
             <CalcButton value="." />
             <CalcButton value="=" />
-          </div>
+          </div>         
         </div>
+         <button onClick={this.handleClick1}>Save To History</button><br/>
         <Link to="/History">History</Link>
       </div>
     );
@@ -105,16 +92,17 @@ function CalcButton(props) {
   return <button className="button">{props.value}</button>;
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state){      
   return{
-    result:state.evaluate.data,    
+   result:state.evaluate.data
+   
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    evaluate: evaluate,  
-    clearResult:clearResult
+    inputdata:inputdata,
+    history:history
   }, dispatch);
 };
 

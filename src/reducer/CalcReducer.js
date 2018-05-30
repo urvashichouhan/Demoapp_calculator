@@ -1,13 +1,15 @@
-import {EVALUATE_EXPRESSION,INPUT_SCREEN,CLEAR_RESULT} from '../action/types';
-const defaultState = {
-  data: "",  
-};
+import {INPUT_SCREEN} from '../action/types';
+var data=" ";
+var data1=" ";
+var data2='';
+var var1;
+var op=" ";
+var var2;
 
-function compute(data){
-  var num1 = data.var1;
-  var num2 = data.var2;
-  var op=data.op[0];
-  
+function compute(var1,var2,op){
+  var num1 =parseFloat(var1);
+  var num2 = parseFloat(var2);
+  var op=op; 
   switch(op){
     case '+':
       return num1 + num2
@@ -22,18 +24,64 @@ function compute(data){
   }
 }
 
-export default function (state=0,action){
-  switch (action.type){
-    case "EVALUATE_EXPRESSION":
-      return {
-      	...state,
-      	data:compute(action.payload)
+function input(input){
+
+  switch (input) {
+    case '=':   
+      var2=data1;
+      data2=compute(var1,var2,op);  
+      op=" ";   
+      var summary=[data,"=",data2]      
+      return summary;           
+      break;
+    case 'C':
+      data=" ";
+      data1='';
+      op=" ";
+      var1= '';
+      var2='';
+      return data;
+      break;
+    case '+':
+    case '%':
+    case '/':
+    case '*':
+    case '-':   
+      if(op===" ")
+      {
+        var1=data;
+        data=data.concat(input);      
+        op= input;
+        return data;
       }
-  	case "CLEAR_RESULT":
-      return {
-      	...state,
-      	data:' '
-      }     
+      else{
+        var2=data1;
+        return " only one operation at a time"  
+      }                 
+      break;
+    default:   
+      if(data===''){
+        data=input;    
+      return data;}
+      else{      
+        if(data.includes("+")||data.includes("-")||data.includes("*")||data.includes("/")||data.includes("%"))
+        { data1=data1.concat(input)
+        }
+        data=data.concat(input)
+        return data;
+      }
+      break;    
+  }
+}
+
+export default function (state=0,action){
+
+  switch (action.type){
+    case INPUT_SCREEN :
+      return{
+        ...state,
+        data:input(action.payload)
+      }    
   	default:
 			return state;
 	}

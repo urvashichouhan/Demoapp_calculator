@@ -1,28 +1,46 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-export default class History extends Component{
-	state = {
+import {gethistory} from '../action/Historyaction.js';
+import Cal from './Cal.js'
+
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+ class History extends Component{
+  state = {
     Calculations:[]
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3030/hello3')
-      .then(res => {
-        const Calculations = res.data;
-        this.setState({ Calculations });
-        console.log(Calculations)
-      })
+    this.props.gethistory()
   }
-	render(){		
-		return(		
-			<div className="container">
-				<h1>History</h1>	
-				<div className="box">	
-					{ this.state.Calculations.map(Calculations => <li>{Calculations.inputCalculation}={Calculations.summary}</li>)}  					
-				</div>			
-				<Link to="/Cal">Open Calculator</Link>		     
-  		</div> 
-		);
-	}
+
+  render(){   
+    const Calculations=[];
+ 
+    console.log(Calculations)
+    return(   
+      <div className="container">
+        <h1>History</h1>  
+        <div className="box"> 
+          { this.props.summary}           
+        </div>      
+        <Link to="/Cal">Open Calculator</Link>         
+      </div> 
+    );
+  }
 }
+function mapStateToProps(state){      
+  
+  return{ 
+    summary:state.history.data
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ gethistory
+  }, dispatch);
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(History);

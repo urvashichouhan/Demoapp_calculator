@@ -1,16 +1,8 @@
-import {EVALUATE_EXPRESSION,INPUT_SCREEN,CLEAR_RESULT} from './types.js';
-export function evaluate(data){
+import {INPUT_SCREEN} from './types.js';
+
+export function inputdata(data){	
   return {
-    type:"EVALUATE_EXPRESSION",
+    type:"INPUT_SCREEN",
     payload: data
   }
 }
-export function inputdata(data){
-  return {
-    type:"EVALUATE_EXPRESSION",
-    payload: data
-  }
-}
-export const clearResult = () => ({
-  type: CLEAR_RESULT  
-});

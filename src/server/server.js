@@ -12,7 +12,6 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/my_db');
 
 var HistorySchema = mongoose.Schema({
-  inputCalculation: String,
   summary: String 
 });
 var History = mongoose.model("History", HistorySchema);
@@ -77,22 +76,20 @@ app.post('/saveuserdata', (req, res) => {
 	})	
 });	
 app.post('/savehistory', (req, res) => {
-  var data1 = new History({
-    inputCalculation: req.body.data1.inputCalculation,
-    summary:req.body.data1.summary
+  var data = new History({    
+    summary:req.body.data.summary
   })
-  data1.save()
+  data.save()
   .then(data => {
-    console.log(data1);
-    res.json(data1);
+    console.log(data);
+    res.json(data);
   })  
 }); 
 app.get('/retrievehistory', async function(req, res){   
   var history = await History.find();
-  console.log("---------------------------", history);
-  var input=history.map(history=>history.inputCalculation);
-  console.log(">>>>>>"+input)
-  res.send(history);
+  console.log("*********************************************",history);
+  var input=history.map(history=>history.summary);
+  res.send(input);
 });
 app.listen(3030,function(){
 	console.log("server is running...")
