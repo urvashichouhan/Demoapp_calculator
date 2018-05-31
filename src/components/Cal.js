@@ -34,12 +34,13 @@ class Cal extends Component {
     this.props.inputdata(data);    
   };
   handleClick1 = event => {    
-    var summary= document.getElementById("myText").innerText;
+    var username=sessionStorage.getItem('uname');       
+    var summary= document.getElementById("myText").innerText;       
     var data1={
+      username:username,
       summary:summary      
-    }
-    
-   this.props.history(data1);   
+    }    
+    this.props.history(data1);   
   };
 
   render() {     
@@ -94,8 +95,7 @@ function CalcButton(props) {
 
 function mapStateToProps(state){      
   return{
-   result:state.evaluate.data
-   
+   result:state.evaluate.data   
   }
 }
 

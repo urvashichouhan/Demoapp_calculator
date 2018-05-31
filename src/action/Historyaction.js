@@ -7,8 +7,9 @@ export function history(data){
 		payload: axios.post('http://localhost:3030/savehistory',{data})
   } 
 }
-export function gethistory(){	
+export function gethistory(username){		
 	return 	{
 		type:GET_HISTORY,
+		payload: username
   } 
 }

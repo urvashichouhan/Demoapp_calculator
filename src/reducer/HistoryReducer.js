@@ -11,11 +11,11 @@ export default function(state= initialState,action){
 			...state,
 			data:action.payload
 		}
-		case HISTORY_FETCH_SUCCEEDED:	
+		case HISTORY_FETCH_SUCCEEDED:	console.log(action.calculation.data)
 		return{
 			...state,
 			data:action.calculation.data
-		}
+		}		
 		default:
 			return state;
 	}

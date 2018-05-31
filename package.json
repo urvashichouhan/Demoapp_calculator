@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
@@ -14,6 +15,8 @@
     "passport": "^0.4.0",
     "passport-json": "^1.2.0",
     "passport-local": "^1.0.0",
+    "passport-oauth": "^1.0.0",
+    "passport-openid": "^0.4.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",

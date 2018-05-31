@@ -12,6 +12,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/my_db');
 
 var HistorySchema = mongoose.Schema({
+  username:String,
   summary: String 
 });
 var History = mongoose.model("History", HistorySchema);
@@ -24,8 +25,21 @@ var personSchema= mongoose.Schema({
   email: String,
   phone:Number
 });
+personSchema.methods.validPassword = function (password) {
+  if (password === this.password) {
+    return true; 
+  } else {
+    return false;
+  }
+}
 var Person = mongoose.model("Person", personSchema);
 app.use(cors({origin:'*'}));
+personSchema.statics.hashPassword = function hashPassword(password){
+  return bcrypt.hashSync(password,10);
+}
+personSchema.methods.validPassword = function(hashedpassword){
+  return  bcrypt.compareSync(hashedpassword, this.password);
+}
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -35,19 +49,22 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    console.log(username)
-    console.log(password)
-    Person.findOne({ 
-      username :username}, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      if (!user.password) { return done(null, false); }
-      return done(null, user);
-    });
-  }
-));
+
+passport.use(new LocalStrategy(function(username, password, done) {
+  Person.findOne({ username: username }, function(err, user) {
+    console.log(arguments);
+    if (err) { 
+      return done(err); 
+    }
+    if (!user) {
+      return done(null, false, { message: 'Incorrect username.' });
+    }
+    if (!user.validPassword(password)) {
+      return done(null, false, { message: 'Incorrect password.' });
+    }
+    return done(null, user);
+  });
+}));
 
 app.post('/authenticatedata', 
   passport.authenticate('local', { successRedirect:'/Success',
@@ -60,7 +77,6 @@ app.get('/Failure', (req, res) => {
 app.get('/Success', (req, res) => {
   res.send(true);
 }); 
-
 
 app.post('/saveuserdata', (req, res) => {  
 	var data = new Person({
@@ -76,7 +92,8 @@ app.post('/saveuserdata', (req, res) => {
 	})	
 });	
 app.post('/savehistory', (req, res) => {
-  var data = new History({    
+  var data = new History({   
+    username:req.body.data.username, 
     summary:req.body.data.summary
   })
   data.save()
@@ -85,9 +102,10 @@ app.post('/savehistory', (req, res) => {
     res.json(data);
   })  
 }); 
-app.get('/retrievehistory', async function(req, res){   
-  var history = await History.find();
-  console.log("*********************************************",history);
+app.post('/retrievehistory', async function(req, res){   
+  var username=req.body.username;
+  console.log(username)
+  var history = await History.find({"username":username});    
   var input=history.map(history=>history.summary);
   res.send(input);
 });

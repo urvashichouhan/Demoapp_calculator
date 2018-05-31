@@ -5,11 +5,11 @@ const initialState={
 
 export default function(state = initialState,action){		
 	switch(action.type){	
-		case USER_FETCH_SUCCEEDED:	
+		case USER_FETCH_SUCCEEDED:
 			return{
-			...state,
-			data:action.user.data
-		}
+				...state,
+				data:action.user.data
+			}
 		default:		
 			return state;
 	}

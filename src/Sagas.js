@@ -12,16 +12,16 @@ function fire(action) {
 
 function* fetchUser(action) {
 	const user = yield call(fire, action);
-   try {     
-      yield put({type: "USER_FETCH_SUCCEEDED",user:user});
-     
-    } catch (e) {
-    	 console.log("in catch", user.data)
-      yield put({type: "USER_FETCH_FAILED", message: e.message});
-    }
+  try {     
+    yield put({type: "USER_FETCH_SUCCEEDED",user:user});     
+  }
+  catch (e) {
+  	 console.log("in catch", user.data)
+    yield put({type: "USER_FETCH_FAILED", message: e.message});
+  }
 }
 function getdata(action) {
-  return axios.get('http://localhost:3030/retrievehistory', action.payload).then(res=>{
+  return axios.post('http://localhost:3030/retrievehistory', {username: action.payload}).then(res=>{
     return res;
   }).catch(function (error) {
     return error;
@@ -30,13 +30,12 @@ function getdata(action) {
 
 function* fetchHistory(action) {
   const calculation = yield call(getdata, action);
-   try {     
-      yield put({type: "HISTORY_FETCH_SUCCEEDED",calculation:calculation});
-     
-    } catch (e) {
-       console.log("in catch", calculation.data)
-      yield put({type: "HISTORY_FETCH_FAILED", message: e.message});
-    }
+  try {     
+    yield put({type: "HISTORY_FETCH_SUCCEEDED",calculation:calculation});     
+  } 
+  catch (e) {      
+    yield put({type: "HISTORY_FETCH_FAILED", message: e.message});
+  }
 }
 
 function* mySaga() {

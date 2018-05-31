@@ -29,12 +29,15 @@ class Login extends Component{
 		if(this.state.username==='')
 			alert('username is required');	
 		if(this.state.password==='')
-			alert('password is required');		
-		var data={
+			alert('password is required');	
+		var name=this.state.username;
+		console.log(name)
+		sessionStorage.setItem("uname",name);
+			var data={
 			username:this.state.username,
 			password:this.state.password,			
 		}
-		this.props.login(data);		
+		this.props.login(data);				
 		if(this.props.auth)	 {
 			this.props.history.push("/Cal"); 
 		}    
@@ -67,8 +70,6 @@ class Login extends Component{
 	}
 }
 function mapStateToProps(state){
-		
-console.log(state)
 	return{
 		auth:state.login.data
 	};
