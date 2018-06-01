@@ -2,8 +2,8 @@ import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { AUTH_DATA,USER_FETCH_SUCCEEDED,USER_FETCH_FAILED, SAVE_HISTORY,GET_HISTORY,  } from './action/types';
 import axios from 'axios';
 
-function fire(action) {
-  return axios.post('http://localhost:3030/authenticatedata', action.payload).then(res=>{
+function* signupdata(action){
+  return axios.post('http://localhost:3030/saveuserdata', {data:action.payload}).then(res=>{
     return res;
   }).catch(function (error) {
     return error;
@@ -11,15 +11,27 @@ function fire(action) {
 }
 
 function* fetchUser(action) {
-	const user = yield call(fire, action);
+  const user = yield call(fire, action);
   try {     
     yield put({type: "USER_FETCH_SUCCEEDED",user:user});     
   }
   catch (e) {
-  	 console.log("in catch", user.data)
+     console.log("in catch", user.data)
     yield put({type: "USER_FETCH_FAILED", message: e.message});
   }
+} 
+
+
+function fire(action){
+  console.log(action);
+  return axios.post('http://localhost:3030/authenticatedata', action.payload).then(res=>{
+    return res;
+  }).catch(function (error) {
+    return error;
+  });
 }
+
+
 function getdata(action) {
   return axios.post('http://localhost:3030/retrievehistory', {username: action.payload}).then(res=>{
     return res;
@@ -39,7 +51,9 @@ function* fetchHistory(action) {
 }
 
 function* mySaga() {
+  yield takeEvery("SAVE_DATA", signupdata);
   yield takeEvery("AUTH_DATA", fetchUser);
   yield takeEvery("GET_HISTORY", fetchHistory);
 } 
+
 export default mySaga;

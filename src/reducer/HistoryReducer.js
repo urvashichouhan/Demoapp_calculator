@@ -1,7 +1,7 @@
 import { SAVE_HISTORY,GET_HISTORY,HISTORY_FETCH_SUCCEEDED,HISTORY_FETCH_FAILED} from '../action/types';
 
 const initialState={
-	data1:{}
+	data1:[]
 }
 
 export default function(state= initialState,action){
@@ -11,7 +11,7 @@ export default function(state= initialState,action){
 			...state,
 			data:action.payload
 		}
-		case HISTORY_FETCH_SUCCEEDED:	console.log(action.calculation.data)
+		case HISTORY_FETCH_SUCCEEDED:	
 		return{
 			...state,
 			data:action.calculation.data

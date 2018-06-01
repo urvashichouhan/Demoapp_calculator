@@ -10,6 +10,7 @@ import {login} from '../action/LoginAction';
 import{LoginReducer} from '../reducer/LoginReducer';
 import {fire} from '../Sagas';
 class Login extends Component{
+	
 	constructor(){
 		super();
 		this.state={username:'',
@@ -18,12 +19,22 @@ class Login extends Component{
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.authdata = this.authdata.bind(this);
 	}
 	handleChange(event){
 		this.setState({[event.target.name]:event.target.value});
 	}
-
-	async handleSubmit(event) { 	
+ componentWillMount() { 
+ 	
+   }
+   async authdata(){   
+   console.log(this.props.auth)	 			
+		if(await this.props.auth)	 {
+			this.props.history.push("/Cal"); 
+		}    
+		
+   }
+	handleSubmit(event) { 	
 		const {count}=this.state;	
 		event.preventDefault();
 		if(this.state.username==='')
@@ -37,13 +48,9 @@ class Login extends Component{
 			username:this.state.username,
 			password:this.state.password,			
 		}
-		this.props.login(data);				
-		if(this.props.auth)	 {
-			this.props.history.push("/Cal"); 
-		}    
-		else{
-			alert("Invalid Username or password")
-		}		
+
+		this.props.login(data);
+			this.authdata();
 	}
 
 	render(){		

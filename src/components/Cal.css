@@ -2,10 +2,14 @@
 .calculator {
   width: 20em;
   margin:auto;
+   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
 }
 
 .row {
   display: flex;
+   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
 }
 
 .top {
@@ -15,17 +19,22 @@
   color: white;
   justify-content: center;
   align-items: center;
+   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
 }
 
 .row button:last-of-type {
   border-right: 0.01em solid #8e8e8e;
   background: #f5923e;
   color: white;
+  
+
 }
 
 .row:last-of-type button:first-child,
 .row:nth-of-type(2) button:first-child {
   flex-grow: 2.65;
+  
 }
 
 .button {
@@ -41,8 +50,11 @@
   user-select: none;
   cursor: pointer;
   outline: none;
+  
+
 }
 
 .button:active {
   background: #b2b2b2;
+
 }

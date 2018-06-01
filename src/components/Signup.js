@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {signup } from '../action/SignupAction';
-//import './Cal.css';
-//import Login from './Login.js'
 
- class Signup extends Component{
+class Signup extends Component{
 	constructor(){
 		super();
 		this.state={
@@ -24,7 +22,7 @@ import {signup } from '../action/SignupAction';
 		this.setState({[event.target.name]:event.target.value});
 	}
 
-	handleSubmit(event) { 
+	async handleSubmit(event) { 
  	 	if(this.state.username==='')
 	 		alert('username is required');	
 		if(this.state.password==='')

@@ -25,21 +25,21 @@ var personSchema= mongoose.Schema({
   email: String,
   phone:Number
 });
-personSchema.methods.validPassword = function (password) {
-  if (password === this.password) {
-    return true; 
-  } else {
-    return false;
-  }
-}
+// personSchema.methods.validPassword = function (password) {
+//   if (password === this.password) {
+//     return true; 
+//   } else {
+//     return false;
+//   }
+// }
 var Person = mongoose.model("Person", personSchema);
 app.use(cors({origin:'*'}));
-personSchema.statics.hashPassword = function hashPassword(password){
-  return bcrypt.hashSync(password,10);
-}
-personSchema.methods.validPassword = function(hashedpassword){
-  return  bcrypt.compareSync(hashedpassword, this.password);
-}
+// personSchema.statics.hashPassword = function hashPassword(password){
+//   return bcrypt.hashSync(password,10);
+// }
+// personSchema.methods.validPassword = function(hashedpassword){
+//   return  bcrypt.compareSync(hashedpassword, this.password);
+// }
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -56,10 +56,10 @@ passport.use(new LocalStrategy(function(username, password, done) {
     if (err) { 
       return done(err); 
     }
-    if (!user) {
+    if (user.username !== username) {
       return done(null, false, { message: 'Incorrect username.' });
     }
-    if (!user.validPassword(password)) {
+    if (user.password !== password) {
       return done(null, false, { message: 'Incorrect password.' });
     }
     return done(null, user);
