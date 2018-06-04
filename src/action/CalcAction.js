@@ -1,4 +1,4 @@
-import {INPUT_SCREEN} from './types.js';
+//import {INPUT_SCREEN} from './types.js';
 
 export function inputdata(data){	
   return {

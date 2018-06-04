@@ -1,9 +1,7 @@
-import { SAVE_HISTORY,GET_HISTORY,HISTORY_FETCH_SUCCEEDED,HISTORY_FETCH_FAILED} from '../action/types';
-
+import { SAVE_HISTORY,HISTORY_FETCH_SUCCEEDED} from '../action/types';
 const initialState={
 	data1:[]
 }
-
 export default function(state= initialState,action){
 	switch(action.type){
 		case SAVE_HISTORY:		

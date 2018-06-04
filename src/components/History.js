@@ -1,13 +1,8 @@
 import React,{Component} from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link } from 'react-router-dom';  
 import {gethistory} from '../action/Historyaction.js';
-import Cal from './Cal.js'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-const state = {
-    summary:[]
-  };
 class History extends Component{
   componentDidMount() {
     var username=sessionStorage.getItem('uname');
@@ -26,9 +21,9 @@ class History extends Component{
       <div className="container">
         <h1>History</h1>  
         <div className="box"> 
-          <ul>
+          
             { this.props.summary }
-          </ul>     
+              
         </div>      
         <Link to="/Cal">Open Calculator</Link>         
       </div> 

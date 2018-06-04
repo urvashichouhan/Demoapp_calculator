@@ -15,13 +15,10 @@ class Signup extends Component{
 	  };
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-	
-		
+	}		
 	handleChange(event){
 		this.setState({[event.target.name]:event.target.value});
 	}
-
 	async handleSubmit(event) { 
  	 	if(this.state.username==='')
 	 		alert('username is required');	
@@ -29,16 +26,14 @@ class Signup extends Component{
 	 		alert('password is required');
 	 	if(this.state.email==='')
 	 		alert('email is required');	  
-	 var data={
+	  var data={
 			username:this.state.username,
 			password:this.state.password,
 			email:this.state.email,
 			phone:this.state.phone
  		}
- 		this.props.signup(data);
- 		
+ 		this.props.signup(data); 		
 	}
-
 	render(){
 		return(
 			<div className="container">
@@ -51,7 +46,7 @@ class Signup extends Component{
 	  				</label> <br/><br/>
 		  			<label >
 					   	Password:
-					    <input className="form-control" type="text" name="password" value={this.state.password} onChange={this.handleChange} />
+					    <input className="form-control" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
 	  				</label> 
 	  				<br/><br/>
 	  				<label >
@@ -67,10 +62,8 @@ class Signup extends Component{
 	  				<input className="btn btn-primary" type="submit" value="Submit" />
   				</div>
   				<Link to="/Login">Already have an account?</Link>
-				</form>	
-				
+				</form>					
 			</div>
-
 		);
 	}
 }
@@ -80,7 +73,6 @@ function mapStateToProps(state){
 
 	}
 }
-
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     signup: signup

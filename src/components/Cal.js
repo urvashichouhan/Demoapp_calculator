@@ -1,21 +1,19 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import History from './History.js'
+//import History from './History.js'
 import './Cal.css';
-import axios from 'axios';
+//import axios from 'axios';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {history} from '../action/Historyaction.js';
-import {evaluate,clearResult ,inputdata} from '../action/CalcAction.js';
+import {inputdata} from '../action/CalcAction.js';
 
 class Cal extends Component {
   state = {
     summary:'',
-    input:''
   };
-  calculateResult(inputCalculation) {     
-    const{input}=this.state;
+  calculateResult(inputCalculation) {       
     let operations = inputCalculation
       .split(/[\d]/)
       .map(val => val.replace(/\./, ''))

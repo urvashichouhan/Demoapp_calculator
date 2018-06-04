@@ -1,9 +1,8 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { AUTH_DATA,USER_FETCH_SUCCEEDED,USER_FETCH_FAILED, SAVE_HISTORY,GET_HISTORY,  } from './action/types';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* signupdata(action){
-  return axios.post('http://localhost:3030/saveuserdata', {data:action.payload}).then(res=>{
+  return yield axios.post('http://localhost:3030/saveuserdata', {data:action.payload}).then(res=>{
     return res;
   }).catch(function (error) {
     return error;

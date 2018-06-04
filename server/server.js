@@ -1,3 +1,5 @@
+var person=require('../src/models/personSchema');
+var History=require('.. /src/models/historySchema');
 var express = require('express');
 var app = express();
 var cors=require('cors');
@@ -10,62 +12,34 @@ app.use(passport.initialize());
 app.use(passport.session());
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/my_db');
-
-var HistorySchema = mongoose.Schema({
-  username:String,
-  summary: String 
-});
-var History = mongoose.model("History", HistorySchema);
 app.use(cors({origin:'*'}));
-
-
-var personSchema= mongoose.Schema({
-  username: String,
-  password: String,
-  email: String,
-  phone:Number
-});
-// personSchema.methods.validPassword = function (password) {
-//   if (password === this.password) {
-//     return true; 
-//   } else {
-//     return false;
-//   }
-// }
-var Person = mongoose.model("Person", personSchema);
-app.use(cors({origin:'*'}));
-// personSchema.statics.hashPassword = function hashPassword(password){
-//   return bcrypt.hashSync(password,10);
-// }
-// personSchema.methods.validPassword = function(hashedpassword){
-//   return  bcrypt.compareSync(hashedpassword, this.password);
-// }
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 }); 
 passport.deserializeUser(function(id, done) {
-  Person.findById(id, function (err, user) {
+  person.findById(id, function (err, user) {
     done(err, user);
   });
 });
-
-passport.use(new LocalStrategy(function(username, password, done) {
-  Person.findOne({ username: username }, function(err, user) {
-    console.log(arguments);
-    if (err) { 
-      return done(err); 
-    }
-    if (user.username !== username) {
-      return done(null, false, { message: 'Incorrect username.' });
-    }
-    if (user.password !== password) {
-      return done(null, false, { message: 'Incorrect password.' });
-    }
-    return done(null, user);
-  });
-}));
-
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    person.findOne({
+      username: username
+    }, function(err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
+      if (user.password != password) {
+        return done(null, false);
+      }
+      return done(null, user);
+    });
+  }
+));
 app.post('/authenticatedata', 
   passport.authenticate('local', { successRedirect:'/Success',
     failureRedirect:'/Failure'}
@@ -77,9 +51,9 @@ app.get('/Failure', (req, res) => {
 app.get('/Success', (req, res) => {
   res.send(true);
 }); 
-
-app.post('/saveuserdata', (req, res) => {  
-	var data = new Person({
+app.post('/saveuserdata',(req, res) => {  
+  console.log(req.body)
+	var data = new person({
 		username:req.body.data.username,
 		password:req.body.data.password,
 		email:req.body.data.email,

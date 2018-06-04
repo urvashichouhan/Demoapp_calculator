@@ -1,41 +1,29 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Signup from './Signup.js'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import Cal from './Cal.js'
-import {signup } from '../action/SignupAction';
 import {Link} from 'react-router-dom';
 import {login} from '../action/LoginAction';
-import{LoginReducer} from '../reducer/LoginReducer';
-import {fire} from '../Sagas';
-class Login extends Component{
-	
+
+class Login extends Component{	
 	constructor(){
 		super();
 		this.state={username:'',
-			password:'',
-			count:0
+			password:''		
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.authdata = this.authdata.bind(this);
 	}
 	handleChange(event){
 		this.setState({[event.target.name]:event.target.value});
-	}
- componentWillMount() { 
- 	
-   }
-   async authdata(){   
-   console.log(this.props.auth)	 			
-		if(await this.props.auth)	 {
-			this.props.history.push("/Cal"); 
-		}    
-		
-   }
-	handleSubmit(event) { 	
-		const {count}=this.state;	
+	} 
+
+  componentDidUpdate() {
+    var bool=this.props.auth;    
+    if( bool)   {
+      this.props.history.push("/Cal"); 
+    }   
+  }
+	handleSubmit(event) { 		
 		event.preventDefault();
 		if(this.state.username==='')
 			alert('username is required');	
@@ -48,9 +36,7 @@ class Login extends Component{
 			username:this.state.username,
 			password:this.state.password,			
 		}
-
-		this.props.login(data);
-			this.authdata();
+		this.props.login(data);			
 	}
 
 	render(){		
@@ -65,7 +51,7 @@ class Login extends Component{
 						</label> <br/><br/>
 						<label >
 							Password:
-							<input className="form-control" type="text" name="password" value={this.state.password} onChange={this.handleChange}/>
+							<input className="form-control" type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
 						</label> 
 						<br/><br/>
 						<input  className="btn btn-primary" type="submit" value="Submit" />

@@ -9,8 +9,8 @@ var var2;
 function compute(var1,var2,op){
   var num1 =parseFloat(var1);
   var num2 = parseFloat(var2);
-  var op=op; 
-  switch(op){
+  var op1=op; 
+  switch(op1){
     case '+':
       return num1 + num2
     case '-':
@@ -21,6 +21,8 @@ function compute(var1,var2,op){
       return num1 / num2
     case '%':
       return num1 % num2     
+    default:
+      return 0
   }
 }
 
@@ -33,7 +35,6 @@ function input(input){
       op=" ";   
       var summary=[data,"=",data2]      
       return summary;           
-      break;
     case 'C':
       data=" ";
       data1='';
@@ -41,7 +42,7 @@ function input(input){
       var1= '';
       var2='';
       return data;
-      break;
+      
     case '+':
     case '%':
     case '/':
@@ -58,7 +59,7 @@ function input(input){
         var2=data1;
         return " only one operation at a time"  
       }                 
-      break;
+      
     default:   
       if(data===''){
         data=input;    
@@ -69,8 +70,7 @@ function input(input){
         }
         data=data.concat(input)
         return data;
-      }
-      break;    
+      }          
   }
 }
 
