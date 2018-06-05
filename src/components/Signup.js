@@ -20,12 +20,7 @@ class Signup extends Component{
 		this.setState({[event.target.name]:event.target.value});
 	}
 	async handleSubmit(event) { 
- 	 	if(this.state.username==='')
-	 		alert('username is required');	
-		if(this.state.password==='')
-	 		alert('password is required');
-	 	if(this.state.email==='')
-	 		alert('email is required');	  
+ 	   
 	  var data={
 			username:this.state.username,
 			password:this.state.password,
@@ -42,16 +37,16 @@ class Signup extends Component{
 					<div className="form-group">
 						<label >
 	   					UserName:
-	    			  <input className="form-control" type="text" name="username" value={this.state.username} onChange={this.handleChange} />
+	    			  <input className="form-control" type="text" name="username" required value={this.state.username} onChange={this.handleChange} />
 	  				</label> <br/><br/>
 		  			<label >
 					   	Password:
-					    <input className="form-control" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+					    <input className="form-control" type="password" name="password" required value={this.state.password} onChange={this.handleChange} />
 	  				</label> 
 	  				<br/><br/>
 	  				<label >
 					   	Email:
-					    <input className="form-control" type="email" name="email" value={this.state.email} onChange={this.handleChange} />
+					    <input className="form-control" type="email" required name="email" value={this.state.email} onChange={this.handleChange} />
 	  				</label> 
 	  				<br/><br/>
 	  				<label >
@@ -69,6 +64,7 @@ class Signup extends Component{
 }
 
 function mapStateToProps(state){
+	console.log(state.signup)
 	return{
 
 	}

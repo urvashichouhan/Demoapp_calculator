@@ -7,7 +7,9 @@ import Demo from './components/Demo.js'
 import Login from './components/Login.js'
 import Cal from './components/Cal.js'
 import History from './components/History.js'
+
 class App extends Component {
+
   render() {
     return (
       <div className="App">

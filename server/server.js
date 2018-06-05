@@ -1,5 +1,9 @@
 var person=require('../src/models/personSchema');
-var History=require('.. /src/models/historySchema');
+var History=require('../src/models/historySchema');
+var signup=require('../src/controllers/signup');
+var history=require('../src/controllers/history');
+//var gethistory=require('../src/controllers/gethistory');
+var gethistory=require('../src/controllers/gethistory');
 var express = require('express');
 var app = express();
 var cors=require('cors');
@@ -51,31 +55,10 @@ app.get('/Failure', (req, res) => {
 app.get('/Success', (req, res) => {
   res.send(true);
 }); 
-app.post('/saveuserdata',(req, res) => {  
-  console.log(req.body)
-	var data = new person({
-		username:req.body.data.username,
-		password:req.body.data.password,
-		email:req.body.data.email,
-		phone:req.body.data.phone
-	})
-	data.save()
-	.then(data => {
-		console.log(data);
-		res.json(data);
-	})	
-});	
-app.post('/savehistory', (req, res) => {
-  var data = new History({   
-    username:req.body.data.username, 
-    summary:req.body.data.summary
-  })
-  data.save()
-  .then(data => {
-    console.log(data);
-    res.json(data);
-  })  
-}); 
+app.use('/saveuserdata',signup);	
+app.use('/savehistory', history);
+  
+ 
 app.post('/retrievehistory', async function(req, res){   
   var username=req.body.username;
   console.log(username)
@@ -83,6 +66,7 @@ app.post('/retrievehistory', async function(req, res){
   var input=history.map(history=>history.summary);
   res.send(input);
 });
+//app.use('/retrievehistory',gethistory);
 app.listen(3030,function(){
 	console.log("server is running...")
 }); 

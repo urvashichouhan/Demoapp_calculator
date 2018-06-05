@@ -20,7 +20,9 @@ class Login extends Component{
   componentDidUpdate() {
     var bool=this.props.auth;    
     if( bool)   {
+
       this.props.history.push("/Cal"); 
+      
     }   
   }
 	handleSubmit(event) { 		
@@ -57,6 +59,7 @@ class Login extends Component{
 						<input  className="btn btn-primary" type="submit" value="Submit" />
 					</div>
 				</form>
+        <br/>
 				<Link to="/Signup">Not Registered?</Link>
 			</div>
 		);
