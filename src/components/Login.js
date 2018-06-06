@@ -19,18 +19,12 @@ class Login extends Component{
 
   componentDidUpdate() {
     var bool=this.props.auth;    
-    if( bool)   {
-
-      this.props.history.push("/Cal"); 
-      
+    if( bool){
+      this.props.history.push("/Cal");      
     }   
   }
 	handleSubmit(event) { 		
-		event.preventDefault();
-		if(this.state.username==='')
-			alert('username is required');	
-		if(this.state.password==='')
-			alert('password is required');	
+		event.preventDefault();			
 		var name=this.state.username;
 		console.log(name)
 		sessionStorage.setItem("uname",name);
@@ -38,7 +32,7 @@ class Login extends Component{
 			username:this.state.username,
 			password:this.state.password,			
 		}
-		this.props.login(data);			
+		this.props.login(data);
 	}
 
 	render(){		
@@ -49,11 +43,11 @@ class Login extends Component{
 					<div className="form-group">
 						<label >
 							UserName:
-						  <input className="form-control" type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
+						  <input className="form-control" required type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
 						</label> <br/><br/>
 						<label >
 							Password:
-							<input className="form-control" type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
+							<input className="form-control" required type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
 						</label> 
 						<br/><br/>
 						<input  className="btn btn-primary" type="submit" value="Submit" />

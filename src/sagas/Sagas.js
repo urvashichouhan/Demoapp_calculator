@@ -1,7 +1,9 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-
+/*For signup page*/
+/*To save user data in the database*/
 function signupdata(action){
+  console.log(action.payload)
   return  axios.post('http://localhost:3030/saveuserdata', {data:action.payload}).then(res=>{
     return res;
   }).catch(function (error) {
@@ -18,8 +20,11 @@ function* signUpdata(action) {
     yield put({type: "DATA_SAVE_FAILED", message: e.message});
   }
 } 
+/*For login page*/
+/*To send username and password to the database for authentication and getting response*/
 function* fetchUser(action) {
   const user = yield call(fire, action);
+  console.log(user)
   try {     
     yield put({type: "USER_FETCH_SUCCEEDED",user:user});     
   }
@@ -36,6 +41,8 @@ function fire(action){
     return error;
   });
 }
+
+/*For retrieving history*/
 function getdata(action) {
   return axios.post('http://localhost:3030/retrievehistory', {username: action.payload}).then(res=>{
     return res;
@@ -45,6 +52,7 @@ function getdata(action) {
 }
 function* fetchHistory(action) {
   const calculation = yield call(getdata, action);
+ 
   try {     
     yield put({type: "HISTORY_FETCH_SUCCEEDED",calculation:calculation});     
   } 

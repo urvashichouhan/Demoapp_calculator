@@ -10,6 +10,7 @@ export default function(state= initialState,action){
 			data:action.payload
 		}
 		case HISTORY_FETCH_SUCCEEDED:	
+		console.log(action.calculation.data)
 		return{
 			...state,
 			data:action.calculation.data

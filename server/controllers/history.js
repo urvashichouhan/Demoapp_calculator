@@ -1,5 +1,3 @@
-var express = require('express');
-var router = express.Router();
 var History=require('../models/historySchema');
 history=(req, res)=>{  
   var data = new History({   
@@ -12,5 +10,4 @@ history=(req, res)=>{
     res.json(data);
   })  
 }
-
 module.exports=history;

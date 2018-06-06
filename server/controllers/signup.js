@@ -1,5 +1,3 @@
-var express = require('express');
-var router = express.Router();
 var person=require('../models/personSchema');
 signup=(req, res)=>{  
   console.log(req.body)
