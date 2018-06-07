@@ -3,4 +3,4 @@ export function inputdata(data){
     type:"INPUT_SCREEN",
     payload: data
   }
-}
+} 

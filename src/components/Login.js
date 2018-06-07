@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
+import './login.css';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {login} from '../action/LoginAction';
@@ -14,15 +15,20 @@ class Login extends Component{
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	handleChange(event){
+		event.preventDefault();
 		this.setState({[event.target.name]:event.target.value});
 	} 
-
-  componentDidUpdate() {
-    var bool=this.props.auth;    
-    if( bool){
-      this.props.history.push("/Cal");      
-    }   
+	componentWillUnmount(){
+    window.location.reload();
   }
+   
+  componentDidUpdate() {
+	  var bool=this.props.auth;  	 
+	  if( bool){
+	    this.props.history.push("/cal");  
+	  }   
+  }
+
 	handleSubmit(event) { 		
 		event.preventDefault();			
 		var name=this.state.username;
@@ -35,10 +41,16 @@ class Login extends Component{
 		this.props.login(data);
 	}
 
-	render(){		
+	render(){
+		var msg; 	  
+	  if(this.props.auth===false)
+	    msg="Incorrect username or password!!";	    	
 		return(
 			<div className="container">			
 				<h1>LOGIN</h1><br/><br/>
+				<div className="login">
+		    	{msg}
+		   	</div>	
 				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
 						<label >

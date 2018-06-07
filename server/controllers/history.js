@@ -7,7 +7,7 @@ history=(req, res)=>{
   data.save()
   .then(data => {
     console.log(data);
-    res.json(data);
+    res.json(data); 
   })  
 }
 module.exports=history;

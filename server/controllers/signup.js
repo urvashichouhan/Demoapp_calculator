@@ -9,8 +9,17 @@ signup=(req, res)=>{
 	}) 
 	data.save()
 	.then(data => {
-		console.log(data);
-		res.json(data);
+		console.log(data);		
+		res.send(true);
+
 	})	
+	.catch(err => {
+		console.log("**************************")
+	 res.send(false);
+	 });
 }
+
+
+
+
 module.exports=signup;

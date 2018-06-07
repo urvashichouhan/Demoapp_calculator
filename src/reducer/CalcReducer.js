@@ -77,7 +77,7 @@ function input(input){
 export default function (state=0,action){
 
   switch (action.type){
-    case INPUT_SCREEN :
+    case INPUT_SCREEN :   
       return{
         ...state,
         data:input(action.payload)

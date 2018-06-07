@@ -35,6 +35,7 @@ class Cal extends Component {
       username:username,
       summary:summary      
     }    
+    console.log(data1)
     this.props.history(data1);   
   };
 
@@ -78,7 +79,7 @@ class Cal extends Component {
           </div>         
         </div>
          <button onClick={this.handleClick1}>Save To History</button><br/>
-        <Link to="/History">History</Link>
+        <Link to="/History" >History</Link>
       </div>
     );
   }

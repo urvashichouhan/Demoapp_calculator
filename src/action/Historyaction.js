@@ -7,7 +7,7 @@ export function history(data){
   } 
 }
 export function gethistory(username){		
-	return 	{
+	return 	{ 
 		type:GET_HISTORY,
 		payload: username
   } 

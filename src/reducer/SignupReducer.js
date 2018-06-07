@@ -1,20 +1,17 @@
 import {DATA_SAVE_SUCCEEDED,DATA_SAVE_FAILED } from '../action/types';
-const initialState={
-	data1:{}
-}
-export default function(state= initialState,action){
+export default function(state=0,action){	
 	switch(action.type){
-		case DATA_SAVE_SUCCEEDED:
-		console.log(action.payload)
-		return{
+		case DATA_SAVE_SUCCEEDED:	
+		return {
 			...state,
-			data:action.payload
-		}
+			data:action.user.data
+		}		
 		case DATA_SAVE_FAILED:
 		return{
-			data:action.payload
+			...state,
+			data:action.message.data
 		}
-		default:
+		default:		
 			return state;
 	}
-}
+} 

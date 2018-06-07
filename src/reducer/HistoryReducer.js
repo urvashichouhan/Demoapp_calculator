@@ -4,7 +4,7 @@ const initialState={
 }
 export default function(state= initialState,action){
 	switch(action.type){
-		case SAVE_HISTORY:		
+		case SAVE_HISTORY:		 
 		return{
 			...state,
 			data:action.payload

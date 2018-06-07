@@ -21,7 +21,8 @@ class App extends Component {
             <Route exact path="/"  component={Home}/>
             <Route path ='/Login' component ={Login}/> 
             <Route path ='/Cal' component ={Cal}/>  
-            <Route path ='/History' component ={History}/>  
+            <Route path ='/History' component ={History}/> 
+          
           </div>    
         </Router>
       </div>

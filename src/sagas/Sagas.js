@@ -2,39 +2,34 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 /*For signup page*/
 /*To save user data in the database*/
-function signupdata(action){
-  console.log(action.payload)
+function signupdata(action){ 
   return  axios.post('http://localhost:3030/saveuserdata', {data:action.payload}).then(res=>{
-    return res;
+        return res;
   }).catch(function (error) {
     return error;
-  });
+  }); 
 }
 function* signUpdata(action) {
   const user = yield call(signupdata, action);
   try {     
     yield put({type: "DATA_SAVE_SUCCEEDED",user:user});     
   }
-  catch (e) {
-     console.log("in catch", user.data)
+  catch (e) {   
     yield put({type: "DATA_SAVE_FAILED", message: e.message});
   }
 } 
 /*For login page*/
 /*To send username and password to the database for authentication and getting response*/
 function* fetchUser(action) {
-  const user = yield call(fire, action);
-  console.log(user)
+  const user = yield call(fire, action); 
   try {     
     yield put({type: "USER_FETCH_SUCCEEDED",user:user});     
   }
   catch (e) {
-     console.log("in catch", user.data)
-    yield put({type: "USER_FETCH_FAILED", message: e.message});
+     yield put({type: "USER_FETCH_FAILED", message: e.message});
   }
 } 
 function fire(action){
-  console.log(action);
   return axios.post('http://localhost:3030/authenticatedata', action.payload).then(res=>{
     return res;
   }).catch(function (error) {
@@ -52,7 +47,7 @@ function getdata(action) {
 }
 function* fetchHistory(action) {
   const calculation = yield call(getdata, action);
- 
+  console.log(calculation)
   try {     
     yield put({type: "HISTORY_FETCH_SUCCEEDED",calculation:calculation});     
   } 

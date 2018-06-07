@@ -3,17 +3,13 @@ import { Link } from 'react-router-dom';
 import {gethistory} from '../action/Historyaction.js';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-class History extends Component{  
-
+class History extends Component{   
+  
   componentDidMount() {
-
     var username=sessionStorage.getItem('uname');
-    this.props.gethistory(username);
-    var bool=this.props.summary;        
+    this.props.gethistory(username);      
   }           
-  render(){ 
-    var summary=this.props.summary;  
-    console.log(summary)    
+  render(){       
     return(   
       <div className="container">
         <h1>History</h1>  
@@ -26,7 +22,6 @@ class History extends Component{
   }
 }
 function mapStateToProps(state){  
-var summary=[];  
   return{ 
     summary:state.history.data
   }

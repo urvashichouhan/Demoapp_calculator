@@ -1,8 +1,6 @@
 import { USER_FETCH_SUCCEEDED} from '../action/types';
-const initialState={
-	data:false
-}
-export default function(state = initialState,action){		
+
+export default function(state = 0,action){			 
 	switch(action.type){	
 		case USER_FETCH_SUCCEEDED:
 			return{

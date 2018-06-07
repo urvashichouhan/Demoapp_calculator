@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
 import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import './signup.css';
+import {connect} from 'react-redux'; 
 import {signup } from '../action/SignupAction';
 
 class Signup extends Component{
@@ -11,28 +12,41 @@ class Signup extends Component{
 			username:'',
 			password:'',
 			email:'',
-			phone:'',	  
+			phone:''		
 	  };
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}		
+
 	handleChange(event){
 		this.setState({[event.target.name]:event.target.value});
 	}
 	async handleSubmit(event) { 
- 	   
-	  var data={
+    event.preventDefault();
+    var data={
 			username:this.state.username,
 			password:this.state.password,
 			email:this.state.email,
 			phone:this.state.phone
  		}
- 		this.props.signup(data); 		
+ 		this.props.signup(data); 	
 	}
-	render(){
+	render(){ 
+	var msg;
+    if(this.props.bool===true)
+  		msg="Your account has been created!!!!";
+  	if(this.props.bool===false)
+  		msg="Email ID should be unique!";    	
 		return(
 			<div className="container">
 		    <h1>SignUp</h1><br/><br/>
+		    <div>
+		    	{
+		    		this.props.bool
+		    		?<div className="true">{msg}</div>
+		    		:<div className="false">{msg}</div>
+		    	}
+		    </div>
 				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
 						<label >
@@ -64,9 +78,9 @@ class Signup extends Component{
 }
 
 function mapStateToProps(state){
-	console.log(state.signup)
+	console.log(state)
 	return{
-
+		bool:state.signup.data
 	}
 }
 const mapDispatchToProps = (dispatch) => {
