@@ -7,14 +7,13 @@ passport.serializeUser(function(user, done) {
   done(null, user.id);
 }); 
 passport.deserializeUser(function(id, done) {
-	console.log("id===", id);
+	console.log("id===", id); 
   person.findById(id, function (err, user) {
     done(err, user);
   });
 });
 passport.use(new LocalStrategy(
-  function(username, password, done) {
-  	console.log("************************************",username)
+  function(username, password, done) {  	
     person.findOne({
       username: username
     }, function(err, user) {
@@ -33,7 +32,7 @@ passport.use(new LocalStrategy(
 ));
 auth=(req, res, next)=>{  
   console.log(req.body);
-	passport.authenticate('local', { session: false, successRedirect:'/Success',
+	passport.authenticate('local', {  successRedirect:'/Success',
     failureRedirect:'/Failure'}
   )(req,res,next); 
 }

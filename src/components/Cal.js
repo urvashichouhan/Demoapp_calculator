@@ -24,22 +24,22 @@ class Cal extends Component {
     this.props.evaluate(data);  
   }
 
+
   handleClick = event => {    
     var data= (event.target.innerText)
     this.props.inputdata(data);    
   };
-  handleClick1 = event => {    
+   handleClick1 = async(event) => {    
     var username=sessionStorage.getItem('uname');       
     var summary= document.getElementById("myText").innerText;       
     var data1={
       username:username,
       summary:summary      
     }    
-    console.log(data1)
-    this.props.history(data1);   
+    await this.props.history(data1);   
   };
 
-  render() {     
+  render() {  
     return (
       <div className="container">
        <Link to="/Login">Log-out?</Link>

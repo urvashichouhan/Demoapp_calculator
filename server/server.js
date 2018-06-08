@@ -22,9 +22,9 @@ app.use(passport.session());
 app.use(cors({origin:'*'}));
 
 app.post('/authenticatedata', auth);
-app.use('/saveuserdata',signup);	
-app.use('/savehistory', history);
-app.use('/retrievehistory',gethistory);
+app.post('/saveuserdata',signup);	
+app.post('/savehistory', history);
+app.get('/retrievehistory',gethistory);
 app.get('/Failure', failure); 
 app.get('/Success', success); 
 

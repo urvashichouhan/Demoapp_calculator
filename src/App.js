@@ -10,19 +10,27 @@ import History from './components/History.js'
 
 class App extends Component {
 
-  render() {
+requireAuth(nextState, replace) {
+  console.log(sessionStorage.getItem('bool'))
+  if (sessionStorage.getItem('bool')===false) {
+    replace({
+      pathname: '/login'
+    })
+  }
+}  
+  render() {  
+    var password=sessionStorage.getItem('password');    
+    console.log(password)  
     return (
-      <div className="App">
-        
+      <div className="App">        
         <Router>
           <div>
             <Route path="/" component={Demo} />
             <Route path="/Signup" component={Signup} />
             <Route exact path="/"  component={Home}/>
-            <Route path ='/Login' component ={Login}/> 
-            <Route path ='/Cal' component ={Cal}/>  
-            <Route path ='/History' component ={History}/> 
-          
+            <Route path ='/Login' component ={Login}/>            
+            <Route path ='/Cal' component ={Cal} onEnter={this.requireAuth.bind(this)}/> 
+              <Route path ='/History' component ={History} /> 
           </div>    
         </Router>
       </div>

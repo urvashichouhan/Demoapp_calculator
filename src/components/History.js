@@ -5,18 +5,25 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 class History extends Component{   
   
-  componentDidMount() {
+  async componentWillMount(){
+    console.log("in did mount");
     var username=sessionStorage.getItem('uname');
-    this.props.gethistory(username);      
-  }           
-  render(){       
+    await this.props.gethistory(username);    
+
+  }
+  render(){
+    const { summary } = this.props;
+    console.log(summary); 
     return(   
       <div className="container">
-        <h1>History</h1>  
-        <div className="box">         
-          {this.props.summary}
-        </div>      
-        <Link to="/Cal">Open Calculator</Link>         
+        <h1>History</h1>
+        <Link to="/Cal">Open Calculator</Link>        
+          {summary && summary.map((sum, i) => {
+          return(<div key={i}>
+          <li>         
+            {sum}
+          </li>      
+        </div>)})}
       </div> 
     );
   }

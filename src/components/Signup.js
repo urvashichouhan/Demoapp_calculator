@@ -17,7 +17,6 @@ class Signup extends Component{
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}		
-
 	handleChange(event){
 		this.setState({[event.target.name]:event.target.value});
 	}
@@ -30,6 +29,12 @@ class Signup extends Component{
 			phone:this.state.phone
  		}
  		this.props.signup(data); 	
+ 		this.setState({
+ 			username:"",
+ 			password:"",
+ 			email:"",
+ 			hone:""
+ 		});
 	}
 	render(){ 
 	var msg;
@@ -47,7 +52,7 @@ class Signup extends Component{
 		    		:<div className="false">{msg}</div>
 		    	}
 		    </div>
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={this.handleSubmit} method="post">
 					<div className="form-group">
 						<label >
 	   					UserName:
@@ -76,7 +81,6 @@ class Signup extends Component{
 		);
 	}
 }
-
 function mapStateToProps(state){
 	console.log(state)
 	return{
@@ -88,5 +92,4 @@ const mapDispatchToProps = (dispatch) => {
     signup: signup
   }, dispatch);
 };
-
 export default connect(mapStateToProps,mapDispatchToProps)(Signup);

@@ -39,7 +39,7 @@ function fire(action){
 
 /*For retrieving history*/
 function getdata(action) {
-  return axios.post('http://localhost:3030/retrievehistory', {username: action.payload}).then(res=>{
+  return axios.get(`http://localhost:3030/retrievehistory?username=${action.payload}`).then(res=>{
     return res;
   }).catch(function (error) {
     return error;

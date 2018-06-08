@@ -18,29 +18,30 @@ class Login extends Component{
 		event.preventDefault();
 		this.setState({[event.target.name]:event.target.value});
 	} 
-	componentWillUnmount(){
+	componentWillUnmount(){	
+		sessionStorage.removeItem("password");
     window.location.reload();
-  }
-   
+  }   
   componentDidUpdate() {
-	  var bool=this.props.auth;  	 
+	  var bool=this.props.auth;	  	 	 
 	  if( bool){
-	    this.props.history.push("/cal");  
-	  }   
+	    this.props.history.push("/cal");  	  
+	  }  	  
   }
-
 	handleSubmit(event) { 		
 		event.preventDefault();			
 		var name=this.state.username;
-		console.log(name)
+		var password=this.state.password
+		
 		sessionStorage.setItem("uname",name);
+		sessionStorage.setItem("password",password);
 			var data={
 			username:this.state.username,
 			password:this.state.password,			
 		}
 		this.props.login(data);
-	}
 
+	}
 	render(){
 		var msg; 	  
 	  if(this.props.auth===false)
@@ -51,7 +52,7 @@ class Login extends Component{
 				<div className="login">
 		    	{msg}
 		   	</div>	
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={this.handleSubmit} method="post">
 					<div className="form-group">
 						<label >
 							UserName:
@@ -76,11 +77,9 @@ function mapStateToProps(state){
 		auth:state.login.data
 	};
 }
-
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
   	login:login   
   }, dispatch);
 };
-
 export default connect(mapStateToProps,mapDispatchToProps)(Login);
