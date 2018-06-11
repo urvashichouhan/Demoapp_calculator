@@ -4,7 +4,7 @@ export default class Home extends Component{
 		return(		
 			<div className="container">
 				<h1>CALCULATOR</h1>						     
-  			</div> 
+  		</div> 
 		);
 	}
 }

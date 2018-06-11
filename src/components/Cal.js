@@ -42,9 +42,9 @@ class Cal extends Component {
   render() {  
     return (
       <div className="container">
-       <Link to="/Login">Log-out?</Link>
-        <div className="calculator" onClick={this.handleClick}>
-          <div className="row top" id="myText">{this.props.result}</div>
+       <Link to="/Login" data-toggle="tooltip" data-placement="left" title="Log-out!">Log-out?</Link>
+        <div className="calculator " onClick={this.handleClick}>
+          <div className="row top " id="myText">{this.props.result}</div>
           <div className="row">
             <CalcButton value="C" />
             <CalcButton value="%" />
@@ -78,8 +78,9 @@ class Cal extends Component {
             <CalcButton value="=" />
           </div>         
         </div>
-         <button onClick={this.handleClick1}>Save To History</button><br/>
-        <Link to="/History" >History</Link>
+        <br/>
+        <button  className="btn btn-primary" onClick={this.handleClick1}>Save To History</button><br/>
+        <Link to="/History" data-toggle="tooltip" data-placement="left" title="History!">History</Link>
       </div>
     );
   }

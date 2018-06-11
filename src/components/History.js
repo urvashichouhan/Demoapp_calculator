@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router-dom';  
+import './history.css';
 import {gethistory} from '../action/Historyaction.js';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -8,8 +9,7 @@ class History extends Component{
   async componentWillMount(){
     console.log("in did mount");
     var username=sessionStorage.getItem('uname');
-    await this.props.gethistory(username);    
-
+    await this.props.gethistory(username);   
   }
   render(){
     const { summary } = this.props;
@@ -17,13 +17,16 @@ class History extends Component{
     return(   
       <div className="container">
         <h1>History</h1>
-        <Link to="/Cal">Open Calculator</Link>        
+        <Link to="/Cal" data-toggle="tooltip" data-placement="left" title="Calculator!">Open Calculator</Link>   
+        <table className="table table-striped table-dark table-hover" border='1'>   
+          <th>HISTORY!!</th>  
           {summary && summary.map((sum, i) => {
-          return(<div key={i}>
-          <li>         
-            {sum}
-          </li>      
-        </div>)})}
+            return(<tr key={i}>
+              <td>         
+                {sum}
+              </td>      
+            </tr>)})}
+        </table>
       </div> 
     );
   }

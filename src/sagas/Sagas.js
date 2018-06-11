@@ -22,6 +22,7 @@ function* signUpdata(action) {
 /*To send username and password to the database for authentication and getting response*/
 function* fetchUser(action) {
   const user = yield call(fire, action); 
+  console.log("in saga",user)
   try {     
     yield put({type: "USER_FETCH_SUCCEEDED",user:user});     
   }
@@ -30,11 +31,7 @@ function* fetchUser(action) {
   }
 } 
 function fire(action){
-  return axios.post('http://localhost:3030/authenticatedata', action.payload).then(res=>{
-    return res;
-  }).catch(function (error) {
-    return error;
-  });
+  return axios.post('http://localhost:3030/authenticatedata', action.payload);
 }
 
 /*For retrieving history*/

@@ -8,7 +8,8 @@ import {login} from '../action/LoginAction';
 class Login extends Component{	
 	constructor(){
 		super();
-		this.state={username:'',
+		this.state={
+			username:'',
 			password:''		
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -19,31 +20,30 @@ class Login extends Component{
 		this.setState({[event.target.name]:event.target.value});
 	} 
 	componentWillUnmount(){	
-		sessionStorage.removeItem("password");
+		
     window.location.reload();
-  }   
+  } 
   componentDidUpdate() {
+
 	  var bool=this.props.auth;	  	 	 
 	  if( bool){
 	    this.props.history.push("/cal");  	  
 	  }  	  
+	  
   }
 	handleSubmit(event) { 		
 		event.preventDefault();			
-		var name=this.state.username;
-		var password=this.state.password
-		
+		var name=this.state.username;	
 		sessionStorage.setItem("uname",name);
-		sessionStorage.setItem("password",password);
-			var data={
+		var data={
 			username:this.state.username,
-			password:this.state.password,			
+			password:this.state.password			
 		}
 		this.props.login(data);
-
+    
 	}
 	render(){
-		var msg; 	  
+		var msg; 
 	  if(this.props.auth===false)
 	    msg="Incorrect username or password!!";	    	
 		return(
@@ -67,12 +67,13 @@ class Login extends Component{
 					</div>
 				</form>
         <br/>
-				<Link to="/Signup">Not Registered?</Link>
+				<Link to="/Signup" data-toggle="tooltip" data-placement="left" title="SignUp!">Not Registered?</Link>
 			</div>
 		);
 	}
 }
 function mapStateToProps(state){
+
 	return{
 		auth:state.login.data
 	};

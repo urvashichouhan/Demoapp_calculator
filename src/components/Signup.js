@@ -44,7 +44,9 @@ class Signup extends Component{
   		msg="Email ID should be unique!";    	
 		return(
 			<div className="container">
-		    <h1>SignUp</h1><br/><br/>
+			<div className='row1'>
+		    	<h1  >SignUp</h1><br/><br/>
+		    </div>
 		    <div>
 		    	{
 		    		this.props.bool
@@ -75,7 +77,7 @@ class Signup extends Component{
 	  				<br/><br/>
 	  				<input className="btn btn-primary" type="submit" value="Submit" />
   				</div>
-  				<Link to="/Login">Already have an account?</Link>
+  				<Link to="/Login" data-toggle="tooltip" data-placement="left" title="Login!">Already have an account?</Link>
 				</form>					
 			</div>
 		);

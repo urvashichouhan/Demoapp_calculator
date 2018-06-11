@@ -1,0 +1,10 @@
+.table-striped {
+	width:100%;
+	table-layout: fixed;
+	word-wrap: break-word;
+	border-collapse: collapse;
+}
+td{
+	width:100%;
+	border-collapse: collapse;
+}
