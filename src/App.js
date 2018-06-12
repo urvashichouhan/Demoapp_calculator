@@ -8,11 +8,28 @@ import Login from './components/Login.js';
 import Cal from './components/Cal.js';
 import History from './components/History.js';
 //import Auth from './components/auth.js';
-import {connect} from 'react-redux';
-
 class App extends Component {
-  render() {  
-    console.log(this.props.auth)
+  state={
+    bool:false
+  }
+  componentDidMount(){ 
+    sessionStorage.removeItem("bool");
+  } 
+
+  async componentWillMount(){
+   // debugger;
+    var bool1=  sessionStorage.getItem("bool");
+    if(bool1){
+       this.setState({bool:true});
+    }
+    else{
+       this.setState({bool:false});       
+    } 
+    console.log(this.state.bool) 
+  }
+
+  render() {          
+    console.log(this.state.bool);
     return (
       <div className="App">        
         <Router>
@@ -20,18 +37,14 @@ class App extends Component {
             <Route path="/" component={Demo} />
             <Route path="/Signup" component={Signup} />
             <Route exact path="/"  component={Home}/>
-            <Route path ='/Login' component ={Login}/>            
-            <Route path ='/Cal' render={()=>(this.props.auth?(<Cal/>):(<Redirect to="/Login"/>))} /> 
-            <Route path ='/History' component ={History} /> 
+            <Route path ='/Login' component ={Login}/> 
+            <Route path ='/Cal'  render={()=>(this.state.bool?(<Cal/>):(<Redirect to="/Login"/>))} /> 
+            <Route path ='/History'  render={()=>(this.state.bool?(<History/>):(<Redirect to="/Login"/>))} /> 
           </div>    
         </Router>
       </div>
     );
   }
 }
-function mapStateToProps(state){
-  return{
-    auth:state.login.data
-  };
-}
-export default connect(mapStateToProps) (App);
+
+export default App;

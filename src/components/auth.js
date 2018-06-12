@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-export default 	 function(ComposedComponenet){
+export default 	 	{
   class Auth extends React.Component{  
  		componentDidMount(){ 
  			debugger; 		 		

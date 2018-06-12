@@ -19,18 +19,18 @@ class Login extends Component{
 		event.preventDefault();
 		this.setState({[event.target.name]:event.target.value});
 	} 
-	componentWillUnmount(){	
-		
+	componentWillUnmount(){			
     window.location.reload();
   } 
-  componentDidUpdate() {
 
-	  var bool=this.props.auth;	  	 	 
+  componentDidUpdate() {
+	  var bool=this.props.auth;	  	 
+	  sessionStorage.setItem("bool",bool);	 	 
 	  if( bool){
 	    this.props.history.push("/cal");  	  
-	  }  	  
-	  
+	  }  	 
   }
+
 	handleSubmit(event) { 		
 		event.preventDefault();			
 		var name=this.state.username;	
@@ -39,9 +39,9 @@ class Login extends Component{
 			username:this.state.username,
 			password:this.state.password			
 		}
-		this.props.login(data);
-    
+		this.props.login(data);    
 	}
+	
 	render(){
 		var msg; 
 	  if(this.props.auth===false)
@@ -73,7 +73,6 @@ class Login extends Component{
 	}
 }
 function mapStateToProps(state){
-
 	return{
 		auth:state.login.data
 	};

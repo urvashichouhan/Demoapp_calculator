@@ -24,7 +24,6 @@ class Cal extends Component {
     this.props.evaluate(data);  
   }
 
-
   handleClick = event => {    
     var data= (event.target.innerText)
     this.props.inputdata(data);    

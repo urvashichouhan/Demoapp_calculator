@@ -22,7 +22,6 @@ function* signUpdata(action) {
 /*To send username and password to the database for authentication and getting response*/
 function* fetchUser(action) {
   const user = yield call(fire, action); 
-  console.log("in saga",user)
   try {     
     yield put({type: "USER_FETCH_SUCCEEDED",user:user});     
   }
@@ -44,7 +43,6 @@ function getdata(action) {
 }
 function* fetchHistory(action) {
   const calculation = yield call(getdata, action);
-  console.log(calculation)
   try {     
     yield put({type: "HISTORY_FETCH_SUCCEEDED",calculation:calculation});     
   } 

@@ -33,7 +33,7 @@ class Signup extends Component{
  			username:"",
  			password:"",
  			email:"",
- 			hone:""
+ 			phone:""
  		});
 	}
 	render(){ 
