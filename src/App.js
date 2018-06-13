@@ -16,11 +16,11 @@ class App extends Component {
     sessionStorage.removeItem("bool");
   } 
 
-  async componentWillMount(){
-   // debugger;
+  componentWillMount(){   
     var bool1=  sessionStorage.getItem("bool");
+    console.log("bool=",bool1)
     if(bool1){
-       this.setState({bool:true});
+      this.setState({bool:true});
     }
     else{
        this.setState({bool:false});       
@@ -31,7 +31,7 @@ class App extends Component {
   render() {          
     console.log(this.state.bool);
     return (
-      <div className="App">        
+      <div className="App">         
         <Router>
           <div>
             <Route path="/" component={Demo} />
@@ -41,7 +41,7 @@ class App extends Component {
             <Route path ='/Cal'  render={()=>(this.state.bool?(<Cal/>):(<Redirect to="/Login"/>))} /> 
             <Route path ='/History'  render={()=>(this.state.bool?(<History/>):(<Redirect to="/Login"/>))} /> 
           </div>    
-        </Router>
+        </Router> 
       </div>
     );
   }

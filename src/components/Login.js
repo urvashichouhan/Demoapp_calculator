@@ -24,7 +24,8 @@ class Login extends Component{
   } 
 
   componentDidUpdate() {
-	  var bool=this.props.auth;	  	 
+	  var bool=this.props.auth;	 
+	  console.log("************",bool) 	 
 	  sessionStorage.setItem("bool",bool);	 	 
 	  if( bool){
 	    this.props.history.push("/cal");  	  
