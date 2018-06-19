@@ -11,3 +11,8 @@
 form{
 	background-color: #f2f2f2;
 }
+.msg{
+	color: red;
+	width: 100%;
+	height:10%;
+}

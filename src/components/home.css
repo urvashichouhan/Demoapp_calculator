@@ -1,21 +1,21 @@
 .image{
-	position: relative; /* To help the image + text element to get along with the rest of the page*/ 
+	position: relative; /* To help the image + text element to get along with the rest of the page*/
 	width: 100%;
 }
-h2 
-{ 
+h2
+{
 	position: absolute; /* To place the text on the image*/
 	top: 200px; /* The exact location of the text from the top of the image*/
 	right: 250px; /* Other beautification stuff */
-	width: 100%; 
+	width: 100%;
 }
 h2 span /* decorating the text within the span tag */
-{ 
-	color: white; 
-	font: bold 60px Georgia	, Sans-Serif; 
+{
+	color: white;
+	font: bold 60px Georgia	, Sans-Serif;
 	font-style: italic;
-	letter-spacing: -1px; 
-	background: rgb(0, 0, 0); /* fallback color */ 
-	background: rgba(0, 0, 0, 0.7); padding: 10px; 
+	letter-spacing: -1px;
+	background: rgb(0, 0, 0); /* fallback color */
+	background: rgba(0, 0, 0, 0.7); padding: 10px;
 }
 h2 span.spacer { padding:0 5px; }

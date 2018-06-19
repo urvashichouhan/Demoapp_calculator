@@ -9,3 +9,4 @@ export const HISTORY_FETCH_SUCCEEDED='HISTORY_FETCH_SUCCEEDED';//when history is
 export const HISTORY_FETCH_FAILED='HISTORY_FETCH_FAILED';//when history cannot be retrieved successfully 
 export const DATA_SAVE_SUCCEEDED='DATA_SAVE_SUCCEEDED';//when user data is saved in the database
 export const DATA_SAVE_FAILED='DATA_SAVE_FAILED';//when user data is failed to save in the database
+export const OPEN_CAL='OPEN_CAL';

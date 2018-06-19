@@ -22,12 +22,12 @@ app.use(passport.session());
 app.use(cors({origin:'*'}));
 
 app.post('/authenticatedata', auth);
-app.post('/saveuserdata',signup);	
+app.post('/saveuserdata',signup);
 app.post('/savehistory', history);
 app.get('/retrievehistory',gethistory);
-app.get('/Failure', failure); 
-app.get('/Success', success); 
+app.get('/Failure', failure);
+app.get('/Success', success);
 
 app.listen(3030,function(){
 	console.log("server is running...")
-}); 
+});

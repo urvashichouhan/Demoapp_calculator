@@ -1,25 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
 export default 	 	{
-  class Auth extends React.Component{  
- 		componentDidMount(){ 
- 			debugger; 		 		
- 			console.log(this.props.auth1) 	 	
-  		if( this.props.auth1){ 	
- 			} 		
-  		if( !this.props.auth1){  				
+  class Auth extends React.Component{
+ 		componentDidMount(){
+ 			debugger;
+ 			console.log(this.props.auth1)
+  		if( this.props.auth1){
+ 			}
+  		if( !this.props.auth1){
  				alert("login required")
- 				this.props.history.push("/login"); 
- 			} 		
+ 				this.props.history.push("/login");
+ 			}
  		}
- 		render(){ 		
+ 		render(){
  			return(
  				<ComposedComponenet {...this.props}/>
- 			); 			
+ 			);
 		}
- 	}	
- 	function mapStateToProps(state){ 		
-		return{		
+ 	}
+ 	function mapStateToProps(state){
+		return{
 			auth1:state.login.data
 		};
 	}
